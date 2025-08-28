@@ -1,2 +1,2 @@
-#!/usr/bin/env node
-import '../src/index';
+import 'dotenv/config';
+import '../src/cli/commands';

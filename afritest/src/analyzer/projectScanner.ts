@@ -14,7 +14,6 @@ export class ProjectScanner {
         return [];
     }
     this.traverseDirectory(this.projectRoot, files);
-    // Filter out test files and node_modules
     return files.filter(f => !f.includes('node_modules') && !f.endsWith('.spec.ts'));
 }
 

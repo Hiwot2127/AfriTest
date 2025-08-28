@@ -1,6 +1,7 @@
 import { ProjectScanner } from '../analyzer/projectScanner';
 import { writeTests } from './writer';
 import { AIClient } from '../utils/aiClient';
+import * as fs from 'fs';
 
 export class UnitTestGenerator {
     private scanner: ProjectScanner;
@@ -11,24 +12,20 @@ export class UnitTestGenerator {
         this.aiClient = new AIClient();
     }
 
- public async generate(): Promise<void> {
+ public async generate(outputDir: string): Promise<void> {
     const files = this.scanner.scan();
-    const tests: { dir: string, fileName: string, content: string }[] = [];
+     const tests: { dir: string, fileName: string, content: string }[] = [];
     for (const filePath of files) {
         if (!filePath.endsWith('.ts') || filePath.endsWith('.spec.ts')) continue;
-        const fs = await import('fs');
         const code = fs.readFileSync(filePath, 'utf-8');
         const testCode = await this.aiClient.generateUnitTests(code);
         if (testCode) {
-            // Write to your Todo app's test/unit directory
-            const testFileName = `${filePath.split('/').pop()?.replace('.ts', '')}.ai.spec.ts`;
-            tests.push({ dir: '../todo-app/test/unit', fileName: testFileName, content: testCode });
+            const testFileName = `${filePath.split(/[\\/]/).pop()?.replace('.ts', '')}.ai.spec.ts`;
+            tests.push({ dir: outputDir, fileName: testFileName, content: testCode });
         }
     }
     writeTests(tests);
 }
-
-    // For testing
     public async generateTestCode(moduleCode: string): Promise<string> {
         return await this.aiClient.generateUnitTests(moduleCode);
     }
