@@ -27,6 +27,7 @@ export class UnitTestGenerator {
     writeTests(tests);
 }
     public async generateTestCode(moduleCode: string): Promise<string> {
+        console.log("MODULE CODE", moduleCode)
         return await this.aiClient.generateUnitTests(moduleCode);
     }
 }

@@ -1,6 +1,5 @@
 import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
-import { logError } from '../utils/logger';
 
 export function writeTests(tests: { dir: string, fileName: string, content: string }[]): void {
     for (const test of tests) {
@@ -11,7 +10,7 @@ export function writeTests(tests: { dir: string, fileName: string, content: stri
             const filePath = join(test.dir, test.fileName);
             writeFileSync(filePath, test.content, { encoding: 'utf8' });
         } catch (error: any) {
-            logError(`Failed to write test file ${test.fileName}: ${error.message}`);
+            console.error(`Failed to write test file ${test.fileName}: ${error.message}`);
         }
     }
 }
