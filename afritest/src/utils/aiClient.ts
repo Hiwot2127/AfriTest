@@ -5,7 +5,6 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 export class AIClient {
     async generateUnitTests(code: string): Promise<string> {
-        console.log("HERE IS THE CODE", code)
          const prompt = `
 You are an expert backend engineer and test writer.
 Generate Jest unit tests ONLY for the public, exported functions, classes, or methods in the following TypeScript code.
@@ -36,7 +35,6 @@ ${code}
     }
 
     async generateIntegrationTests(code: string): Promise<string> {
-        console.log("THE DEPENDECNY GRAPH", code)
         const prompt = `
 You are an expert backend engineer and test writer.
 Generate a Jest integration test for a Node.js/Express API endpoint related to "${code}".
