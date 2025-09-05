@@ -13,7 +13,6 @@
       "*": ["node_modules/*", "*"]
     }
   },
-  "include": ["src/**/*", "bin/**/*"],
-  "exclude": ["node_modules"],
+  "include": ["src/**/*", "bin/**/*", "test/**/*"],  "exclude": ["node_modules"],
   "types": ["jest", "node"]
 }

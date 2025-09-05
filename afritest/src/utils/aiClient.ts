@@ -7,15 +7,17 @@ export class AIClient {
     async generateUnitTests(code: string): Promise<string> {
          const prompt = `
 You are an expert backend engineer and test writer.
-Generate Jest unit tests ONLY for the public, exported functions, classes, or methods in the following TypeScript code.
+Generate a **Jest unit test file only**.  
 
 Guidelines:
+- Use **TypeScript** and return a **.test.ts** file content.
+- Wrap the code in a single markdown code block with typescript.  
 - Ignore private/internal helpers, types, or configuration code.
 - Focus on realistic scenarios and edge cases for each exported member.
+- Mock dependencies properly.  
 - Do NOT generate tests for trivial getters/setters, type definitions, or constants.
-- Use modern Jest syntax and best practices.
-- Do NOT include any explanation, comments, or extra text outside the code block.
-
+- **Do not include any explanations, comments, or extra text outside the code block**.  
+- When generating import statements, use correct relative paths as if the test file is located in the project root folder.
 Here is the code to test:
 ---
 ${code}
