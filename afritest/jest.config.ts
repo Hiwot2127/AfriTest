@@ -12,4 +12,7 @@ export default {
     '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'json', 'node'],
+  moduleNameMapper: {
+    '^/(.*)$': '<rootDir>/$1'
+  }
 };
