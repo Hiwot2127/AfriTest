@@ -1,2 +1,2 @@
-import 'dotenv/config';
-import '../src/cli/commands';
+import "dotenv/config";
+import "../src/cli/commands";
